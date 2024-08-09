@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="jumbotron text-center">
+                <h1 class="display-4" style="text-align: center;">Welcome to Tech 360!</h1>
+                <h2 class="lead" style="text-align: center;">Your personalized news recommendation system.</h2>
+                <h2 class="lead" style="text-align: center;">Stay informed with the latest news tailored to your interests.</h2>
+            </div>
+
+            <ul class="nav nav-tabs" style="justify-content: center;">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#foryou" data-toggle="tab">For You</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#business" data-toggle="tab">Business</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#entertainment" data-toggle="tab">Entertainment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#general" data-toggle="tab">General</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#health" data-toggle="tab">Health</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#science" data-toggle="tab">Science</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#sports" data-toggle="tab">Sports</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#technology" data-toggle="tab">Technology</a>
+                </li>
+            </ul>
+            <div class="tab-content custom-tab-content">
+                <div class="tab-pane active" id="foryou">
+                    <div class="list-group" id="foryou-list"></div>
+                </div>
+                <div class="tab-pane" id="business">
+                    <div class="list-group" id="business-list"></div>
+                </div>
+                <div class="tab-pane" id="entertainment">
+                    <div class="list-group" id="entertainment-list"></div>
+                </div>
+                <div class="tab-pane" id="general">
+                    <div class="list-group" id="general-list"></div>
+                </div>
+                <div class="tab-pane" id="health">
+                    <div class="list-group" id="health-list"></div>
+                </div>
+                <div class="tab-pane" id="science">
+                    <div class="list-group" id="science-list"></div>
+                </div>
+                <div class="tab-pane" id="sports">
+                    <div class="list-group" id="sports-list"></div>
+                </div>
+                <div class="tab-pane" id="technology">
+                    <div class="list-group" id="technology-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <h2 style="text-align: center;">Trending Topics</h2>
+            <ul class="list-group">
+                <li class="list-group-item">Trending Topic 1</li>
+                <li class="list-group-item">Trending Topic 2</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const categories = ["foryou", "business", "entertainment", "general", "health", "science", "sports", "technology"];
+
+            categories.forEach(category => {
+                fetchNewsByCategory(category);
+            });
+
+            function fetchNewsByCategory(category) {
+                $.ajax({
+                    url: '/Home/GetNewsByCategory',
+                    type: 'GET',
+                    data: { category: category },
+                    success: function (data) {
+                        const newsList = $('#' + category + '-list');
+                        newsList.empty();
+                        $.each(data, function (index, item) {
+                            const newsItem = '<a href="' + item.url + '" class="list-group-item list-group-item-action">' + item.title + '</a>';
+                            newsList.append(newsItem);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error fetching news for category:', category, error);
+                    }
+                });
+            }
+        });
+    </script>
+}

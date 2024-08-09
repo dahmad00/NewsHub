@@ -1,0 +1,164 @@
+﻿
+/*
+
+    Colors:
+    #102C57
+#1679AB
+#FFB1B1
+#FFCBCB
+*/
+/* Ensure the navbar container uses flexbox */
+.navbar-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #102C57; /* Dark background color */
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* Adjust the brand logo */
+.navbar-brand img {
+    height: 30px;
+}
+
+/* Ensure the nav links are styled correctly */
+.navbar-nav .nav-link {
+    color: #ffffff; /* White font color */
+    margin-right: 20px;
+    padding: 0.5rem 1rem;
+    border-right: 1px solid #ffffff; /* Separator line */
+}
+
+    .navbar-nav .nav-link:last-child {
+        border-right: none; /* Remove separator from the last tab */
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #dcdcdc; /* Light grey color on hover */
+    }
+
+/* Center the form inline */
+.form-inline {
+    flex-grow: 1;
+    justify-content: center;
+}
+
+    .form-inline .form-control {
+        width: 300px;
+    }
+
+/* Style the navbar toggler icon */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.profile-link-mobile {
+    display: none;
+}
+
+.center-jumbotron {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+/* DESKTOP */
+@media (min-width: 1101px) {
+    .header-search-form {
+        margin-left: auto 6%;
+        display:flex;
+    }
+
+    .custom-tab-content {
+        margin-left: 43px;
+        margin-right: 43px;
+    }
+
+
+}
+/* MOBILE */
+@media (max-width: 1100px) {
+    .navbar-custom {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 10px;
+    }
+
+    
+
+    .profile-link-mobile {
+        display: inline;
+        width: 30px !important;
+        margin: 0px !important;
+    }
+
+    .navbar-toggler {
+        align-self: center;
+        margin: auto 0;
+        padding-top: 2px;
+        order: 3; /* Keeps the toggler to the end */
+    }
+
+    .navbar-brand {
+        align-self: center;
+        order: 2; /* Brand in the center */
+        margin: 0 auto;
+        padding-left: 20px;
+    }
+
+    .navbar-collapse {
+        width: 100%;
+        text-align: center;
+        order: 4; /* Menu items at the end */
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        width: 100%;
+    }
+
+        .navbar-nav .nav-link {
+            margin: 5px 0;
+            border-right: none;
+        }
+
+    .form-inline {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center; /* Center the search box */
+    }
+
+        .form-inline .form-control {
+            width: 80%; /* Adjusts the width of the search box */
+        }
+
+    .navbar-nav.ml-auto {
+        order: 1; /* Moves the profile link to the very beginning, at the top left */
+        margin-top: 10px;
+        margin-right: auto; /* Aligns all other items to the right */
+        width: 100%; /* Makes sure the element spans the full width at the top */
+    }
+
+    .profile-link {
+        display: none;
+    }
+
+    .header-search-form {
+        display: flex;
+    }
+
+        .header-search-form input {
+            text-align: center;
+            width: 100% !important;
+            padding-left: 30px;
+            margin-bottom: 5px;
+        }
+}
