@@ -1,0 +1,56 @@
+-- Create Users Table
+CREATE TABLE Users (
+    UserId INT PRIMARY KEY IDENTITY(1,1),
+    Username NVARCHAR(50) NOT NULL UNIQUE,
+    Password NVARCHAR(255) NOT NULL, -- Storing hashed passwords
+    Email NVARCHAR(100) NOT NULL UNIQUE,
+    FirstName NVARCHAR(50) NULL,
+    LastName NVARCHAR(50) NULL,
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    UpdatedAt DATETIME DEFAULT GETDATE()
+);
+
+-- Create News Table
+CREATE TABLE News (
+    NewsId INT PRIMARY KEY IDENTITY(1,1),
+    Title NVARCHAR(200) NOT NULL,
+    Content TEXT NOT NULL,
+    Author NVARCHAR(100) NULL,
+    PublishedAt DATETIME DEFAULT GETDATE(),
+    UpdatedAt DATETIME DEFAULT GETDATE()
+);
+
+-- Create UserActivity Table
+CREATE TABLE UserActivity (
+    ActivityId INT PRIMARY KEY IDENTITY(1,1),
+    UserId INT NOT NULL,
+    NewsId INT NOT NULL,
+    ActivityType NVARCHAR(50) NOT NULL, -- e.g., 'Like', 'Dislike', 'Read'
+    ActivityDate DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (UserId) REFERENCES Users(UserId),
+    FOREIGN KEY (NewsId) REFERENCES News(NewsId)
+);
+
+-- Add a trigger to update the UpdatedAt column in Users table
+CREATE TRIGGER trg_UpdateUser
+ON Users
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE Users
+    SET UpdatedAt = GETDATE()
+    WHERE UserId IN (SELECT DISTINCT UserId FROM Inserted);
+END;
+
+-- Add a trigger to update the UpdatedAt column in News table
+CREATE TRIGGER trg_UpdateNews
+ON News
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE News
+    SET UpdatedAt = GETDATE()
+    WHERE NewsId IN (SELECT DISTINCT NewsId FROM Inserted);
+END;
