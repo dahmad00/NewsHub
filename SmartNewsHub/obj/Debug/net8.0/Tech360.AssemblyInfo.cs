@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Tech360")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb4d48e52c6f33891c368c690110030157299a60")]
 [assembly: System.Reflection.AssemblyProductAttribute("Tech360")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Tech360")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
